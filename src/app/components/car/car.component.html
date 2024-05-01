@@ -1,0 +1,22 @@
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">CarName</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Color</th>
+      <th scope="col">Model Year</th>
+      <th scope="col">Daily Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of cars; track item) {
+    <tr>
+      <td>{{ item.carName }}</td>
+      <td>{{ item.brandName }}</td>
+      <td>{{ item.colorName }}</td>
+      <td>{{ item.modelYear }}</td>
+      <td>{{ item.dailyPrice }}</td>
+    </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+<div class="list-group">
+  <a
+    href="#"
+    class="list-group-item list-group-item-action active"
+    aria-current="true"
+  >
+    Colors
+  </a>
+  @for (item of colors; track item.colorId) {
+  <a href="#" class="list-group-item list-group-item-action">{{
+    item.colorName
+  }}</a>
+  }
+</div>

@@ -1,0 +1,14 @@
+<div class="list-group">
+  <a
+    href="#"
+    class="list-group-item list-group-item-action active"
+    aria-current="true"
+  >
+    Brands
+  </a>
+  @for (item of brands; track item.brandId) {
+  <a href="#" class="list-group-item list-group-item-action">{{
+    item.brandName
+  }}</a>
+  }
+</div>
