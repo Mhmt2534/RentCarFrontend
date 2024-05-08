@@ -9,14 +9,22 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of cars; track item) {
-    <tr>
+    @if (selectedCar) { @for (item of cars; track item) {
+    <tr (click)="deneme(item)">
       <td>{{ item.carName }}</td>
       <td>{{ item.brandName }}</td>
       <td>{{ item.colorName }}</td>
       <td>{{ item.modelYear }}</td>
       <td>{{ item.dailyPrice }}</td>
     </tr>
-    }
+    } } @else { @for (item of cars; track item) {
+    <tr (click)="deneme(item)">
+      <td>{{ item.carName }}</td>
+      <td>{{ item.brandName }}</td>
+      <td>{{ item.colorName }}</td>
+      <td>{{ item.modelYear }}</td>
+      <td>{{ item.dailyPrice }}</td>
+    </tr>
+    } }
   </tbody>
 </table>

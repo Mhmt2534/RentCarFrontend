@@ -1,14 +1,20 @@
 <div class="list-group">
   <a
     href="#"
-    class="list-group-item list-group-item-action active"
+    [class]="getAllColor()"
+    routerLink="/cars"
     aria-current="true"
+    (click)="setAllColor()"
   >
-    Colors
+    All Colors
   </a>
   @for (item of colors; track item.colorId) {
-  <a href="#" class="list-group-item list-group-item-action">{{
-    item.colorName
-  }}</a>
+  <a
+    href="#"
+    [class]="getCurrenColor(item)"
+    routerLink="/cars/color/{{ item.colorId }}"
+    (click)="setCurrentColor(item)"
+    >{{ item.colorName }}</a
+  >
   }
 </div>

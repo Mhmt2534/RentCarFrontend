@@ -1,14 +1,20 @@
 <div class="list-group">
   <a
     href="#"
-    class="list-group-item list-group-item-action active"
+    [class]="getAllBrands()"
     aria-current="true"
+    routerLink="/cars"
+    (click)="nullCurrentBrand()"
   >
-    Brands
+    All Brands
   </a>
   @for (item of brands; track item.brandId) {
-  <a href="#" class="list-group-item list-group-item-action">{{
-    item.brandName
-  }}</a>
+  <a
+    href="#"
+    (click)="setCurrentBrand(item)"
+    [class]="getCurrentBrand(item)"
+    routerLink="/cars/brand/{{ item.brandId }}"
+    >{{ item.brandName }}</a
+  >
   }
 </div>
