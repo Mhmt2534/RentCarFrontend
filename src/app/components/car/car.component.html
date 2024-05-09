@@ -1,3 +1,50 @@
+@if (selectedCar) {
+<div class="container" style="position: relative; left: 250px">
+  <div class="card" style="width: 18rem">
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        @for (item of carImages; track item;let i=$index) {
+        <div class="carousel-item active" [class.active]="i == 0">
+          <img
+            [src]="apiImage + item.imagePath"
+            class="d-block w-100"
+            alt="..."
+            style="height: 200px"
+          />
+        </div>
+        }
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedCar.brandName }}</h5>
+      <p class="card-text">Arabanın Özellikleri</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ selectedCar.carName }}</li>
+      <li class="list-group-item">{{ selectedCar.brandName }}</li>
+      <li class="list-group-item">{{ selectedCar.dailyPrice }}</li>
+    </ul>
+  </div>
+</div>
+} @else {
 <table class="table table-dark">
   <thead>
     <tr>
@@ -9,22 +56,15 @@
     </tr>
   </thead>
   <tbody>
-    @if (selectedCar) { @for (item of cars; track item) {
-    <tr (click)="deneme(item)">
+    @for (item of cars; track item) {
+    <tr (click)="deneme(item)" routerLink="/cars/detail/{{ item.carId }}">
       <td>{{ item.carName }}</td>
       <td>{{ item.brandName }}</td>
       <td>{{ item.colorName }}</td>
       <td>{{ item.modelYear }}</td>
       <td>{{ item.dailyPrice }}</td>
     </tr>
-    } } @else { @for (item of cars; track item) {
-    <tr (click)="deneme(item)">
-      <td>{{ item.carName }}</td>
-      <td>{{ item.brandName }}</td>
-      <td>{{ item.colorName }}</td>
-      <td>{{ item.modelYear }}</td>
-      <td>{{ item.dailyPrice }}</td>
-    </tr>
-    } }
+    }
   </tbody>
 </table>
+}
