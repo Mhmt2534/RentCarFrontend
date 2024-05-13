@@ -34,13 +34,17 @@
       </button>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ selectedCar.brandName }}</h5>
+      <h5 class="card-title">{{ selectedCar.carName }}</h5>
       <p class="card-text">Arabanın Özellikleri</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">{{ selectedCar.carName }}</li>
-      <li class="list-group-item">{{ selectedCar.brandName }}</li>
-      <li class="list-group-item">{{ selectedCar.dailyPrice }}</li>
+      <li class="list-group-item">
+        <b>Marka</b> | {{ selectedCar.brandName }}
+      </li>
+      <li class="list-group-item"><b>Renk</b> | {{ selectedCar.colorName }}</li>
+      <li class="list-group-item">
+        <b>Günlük Fiyat</b> | {{ selectedCar.dailyPrice }}
+      </li>
     </ul>
   </div>
 </div>
@@ -57,7 +61,7 @@
   </thead>
   <tbody>
     @for (item of cars; track item) {
-    <tr (click)="deneme(item)" routerLink="/cars/detail/{{ item.carId }}">
+    <tr (click)="selectCar(item)" routerLink="/cars/detail/{{ item.carId }}">
       <td>{{ item.carName }}</td>
       <td>{{ item.brandName }}</td>
       <td>{{ item.colorName }}</td>

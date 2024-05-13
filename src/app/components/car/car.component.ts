@@ -21,6 +21,7 @@ export class CarComponent implements OnInit {
   carImages: CarImageDetail[] = [];
 
   apiImage = 'http://localhost:5270/Uploads/CarImages/';
+  defaultImage = 'http://localhost:5270/Uploads/CarImages/DefaultImage.jpg';
 
   constructor(
     private carService: CarService,
@@ -31,14 +32,19 @@ export class CarComponent implements OnInit {
   ngOnInit(): void {
     this.activetedRouter.params.subscribe((params) => {
       if (params['brandId']) {
+        this.selectedCar = this.nullCar;
         this.getCarsByBrand(params['brandId']);
-      }
-      if (params['colorId']) {
+        console.log('parametre brand geldi' + params['brandId']);
+        console.log(this.cars);
+      } else if (params['colorId']) {
         this.getCarsByColor(params['colorId']);
-      }
-      if (params['carId']) {
-        this.getCarsDetails(params['carId']);
+        this.selectedCar = this.nullCar;
+
+        console.log('parametre color geldi');
+      } else if (params['carId']) {
         this.getCarImagesByCarId(params['carId']);
+        this.getCarsDetails(params['carId']);
+        console.log('parametre car detail geldi  ' + params['carId']);
       } else {
         this.getCars();
       }
@@ -48,44 +54,41 @@ export class CarComponent implements OnInit {
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
+      console.log(this.cars);
     });
   }
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe((response) => {
-      console.log(response.message);
-
       this.cars = response.data;
-      console.log(brandId);
+      console.log('response geliyor');
+      console.log(this.cars);
     });
   }
 
   getCarsByColor(colorId: number) {
     this.carService.getCarsByColor(colorId).subscribe((response) => {
-      console.log(response.message);
-
       this.cars = response.data;
-      console.log(colorId);
     });
   }
 
   getCarsDetails(carId: number) {
     this.carService.getCarsDetails(carId).subscribe((response) => {
       this.selectedCar = response.data;
+      console.log('Araba getirildi');
+      console.log(this.selectedCar);
     });
   }
 
   getCarImagesByCarId(carId: number) {
     this.carImageService.getCarImagesByCarId(carId).subscribe((response) => {
-      console.log(response.data);
-
       this.carImages = response.data;
-      console.log(carId);
+      console.log('Resim getirildi');
     });
   }
 
-  deneme(car: Car) {
+  selectCar(car: Car) {
     this.selectedCar = car;
-    console.log(this.selectedCar.carId);
+    console.log(car.carName);
   }
 }
