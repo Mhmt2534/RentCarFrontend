@@ -1,3 +1,14 @@
+<br />
+<div class="mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Enter Color"
+  />
+</div>
+
 <div class="list-group">
   <a
     href="#"
@@ -8,7 +19,7 @@
   >
     All Colors
   </a>
-  @for (item of colors; track item.colorId) {
+  @for (item of colors | filterColor:filterText; track item.colorId) {
   <a
     href="#"
     [class]="getCurrenColor(item)"

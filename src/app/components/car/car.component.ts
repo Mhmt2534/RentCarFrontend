@@ -5,11 +5,14 @@ import { response } from 'express';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CarImageService } from '../../services/car-image.service';
 import { CarImageDetail } from '../../models/carImageDetail';
+import { FormsModule } from '@angular/forms';
+import { FilterCarPipe } from '../../pipes/filter-car.pipe';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, FormsModule, FilterCarPipe, CurrencyPipe],
   templateUrl: './car.component.html',
   styleUrl: './car.component.css',
 })
@@ -22,6 +25,7 @@ export class CarComponent implements OnInit {
 
   apiImage = 'http://localhost:5270/Uploads/CarImages/';
   defaultImage = 'http://localhost:5270/Uploads/CarImages/DefaultImage.jpg';
+  filterText: '';
 
   constructor(
     private carService: CarService,

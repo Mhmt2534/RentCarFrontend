@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-car-detail',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
   templateUrl: './car-detail.component.html',
   styleUrl: './car-detail.component.css',
 })
-export class CarDetailComponent {}
+export class CarDetailComponent implements OnInit {
+  constructor(httpClient: HttpClient) {}
+
+  ngOnInit(): void {}
+}
