@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col">
+    <select
+      class="form-select"
+      id="brandFilter"
+      aria-label="Default select example"
+      [(ngModel)]="selectedBrandId"
+    >
+      <option [ngValue]="null" disabled selected>Select Brand</option>
+      @for (brand of brands; track $index) {
+      <option value="{{ brand.brandId }}">
+        {{ brand.brandName }}
+      </option>
+      }
+    </select>
+  </div>
+  <div class="col">
+    <select
+      class="form-select"
+      id="colorFilter"
+      aria-label="Default select example"
+      [(ngModel)]="selectedColorId"
+    >
+      <option [ngValue]="null" disabled selected>Select Color</option>
+
+      @for (color of colors; track $index) {
+      <option value="{{ color.colorId }}">
+        {{ color.colorName }}
+      </option>
+      }
+    </select>
+  </div>
+  <div class="col">
+    <button
+      type="submit"
+      [class]="changeButtonClass()"
+      [routerLink]="changeRouteLink()"
+    >
+      Filtrele
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success"
+      style="margin-left: 10%"
+      routerLink=""
+    >
+      Temizle
+    </button>
+  </div>
+</div>

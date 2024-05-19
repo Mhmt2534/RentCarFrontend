@@ -47,22 +47,10 @@
         <b>Günlük Fiyat</b> |
         {{ selectedCar?.dailyPrice | currency : "₺" : "symbol" : "1.2-2" }}
       </li>
-      @if (!isRental) {
+
       <li style="text-align: center" class="list-group-item">
-        <button class="btn btn-success mt-1 mb-1" (click)="notRental()">
-          Kirala
-        </button>
+        <button class="btn btn-success mt-1 mb-1">Kirala</button>
       </li>
-      } @else {
-      <li style="text-align: center" class="list-group-item">
-        <button
-          class="btn btn-success mt-1 mb-1"
-          [routerLink]="IsRentalCar(selectedCar.carId)"
-        >
-          Kirala
-        </button>
-      </li>
-      }
     </ul>
   </div>
 </div>

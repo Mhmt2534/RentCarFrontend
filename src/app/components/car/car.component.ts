@@ -8,17 +8,25 @@ import { CarImageDetail } from '../../models/carImageDetail';
 import { FormsModule } from '@angular/forms';
 import { FilterCarPipe } from '../../pipes/filter-car.pipe';
 import { CurrencyPipe } from '@angular/common';
+import { CarFilterFullComponent } from '../car-filter-full/car-filter-full.component';
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [RouterModule, FormsModule, FilterCarPipe, CurrencyPipe],
   templateUrl: './car.component.html',
   styleUrl: './car.component.css',
+  imports: [
+    RouterModule,
+    FormsModule,
+    FilterCarPipe,
+    CurrencyPipe,
+    CarFilterFullComponent,
+  ],
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
-  selectedCar: Car;
+  selectedCar: Car = {} as Car;
+
   nullCar: Car;
 
   carImages: CarImageDetail[] = [];
@@ -35,20 +43,16 @@ export class CarComponent implements OnInit {
 
   ngOnInit(): void {
     this.activetedRouter.params.subscribe((params) => {
-      if (params['brandId']) {
+      if (params['brandId'] && params['colorId']) {
+        this.getCarByBrandAndColor(params['brandId'], params['colorId']);
+        console.log('hem brand hem renk');
         this.selectedCar = this.nullCar;
-        this.getCarsByBrand(params['brandId']);
-        console.log('parametre brand geldi' + params['brandId']);
-        console.log(this.cars);
       } else if (params['colorId']) {
         this.getCarsByColor(params['colorId']);
         this.selectedCar = this.nullCar;
-
-        console.log('parametre color geldi');
-      } else if (params['carId']) {
-        this.getCarImagesByCarId(params['carId']);
-        this.getCarsDetails(params['carId']);
-        console.log('parametre car detail geldi  ' + params['carId']);
+      } else if (params['brandId']) {
+        this.getCarsByBrand(params['brandId']);
+        this.selectedCar = this.nullCar;
       } else {
         this.getCars();
       }
@@ -58,41 +62,32 @@ export class CarComponent implements OnInit {
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
-      console.log(this.cars);
     });
   }
 
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrand(brandId).subscribe((response) => {
       this.cars = response.data;
-      console.log('response geliyor');
-      console.log(this.cars);
+      console.log('brand response geliyor');
     });
   }
 
   getCarsByColor(colorId: number) {
     this.carService.getCarsByColor(colorId).subscribe((response) => {
       this.cars = response.data;
+      console.log('color response geliyor');
     });
   }
 
-  getCarsDetails(carId: number) {
-    this.carService.getCarsDetails(carId).subscribe((response) => {
-      this.selectedCar = response.data;
-      console.log('Araba getirildi');
-      console.log(this.selectedCar);
-    });
-  }
-
-  getCarImagesByCarId(carId: number) {
-    this.carImageService.getCarImagesByCarId(carId).subscribe((response) => {
-      this.carImages = response.data;
-      console.log('Resim getirildi');
-    });
+  getCarByBrandAndColor(brandId: number, colorId: number) {
+    this.carService
+      .getCarByBrandAndColor(brandId, colorId)
+      .subscribe((response) => {
+        this.cars = response.data;
+      });
   }
 
   selectCar(car: Car) {
     this.selectedCar = car;
-    console.log(car.carName);
   }
 }

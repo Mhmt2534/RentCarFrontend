@@ -1,55 +1,3 @@
-@if (selectedCar) {
-<div class="container" style="position: relative; left: 250px">
-  <div class="card" style="width: 18rem">
-    <div id="carouselExample" class="carousel slide">
-      <div class="carousel-inner">
-        @for (item of carImages; track item;let i=$index) {
-        <div class="carousel-item active" [class.active]="i == 0">
-          <img
-            [src]="apiImage + item.imagePath"
-            class="d-block w-100"
-            alt="..."
-            style="height: 200px"
-          />
-        </div>
-        }
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ selectedCar.carName }}</h5>
-      <p class="card-text">Arabanın Özellikleri</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <b>Marka</b> | {{ selectedCar.brandName }}
-      </li>
-      <li class="list-group-item"><b>Renk</b> | {{ selectedCar.colorName }}</li>
-      <li class="list-group-item">
-        <b>Günlük Fiyat</b> |
-        {{ selectedCar.dailyPrice | currency : "₺" : "symbol" : "1.2-2" }}
-      </li>
-    </ul>
-  </div>
-</div>
-} @else {
 <br />
 <div class="mb-3">
   <div class="row">
@@ -62,23 +10,8 @@
         placeholder="Search Car"
       />
     </div>
-    <div class="col-3">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select Brand</option>
-        <option value="1">One</option>
-      </select>
-    </div>
-    <div class="col-3">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select Color</option>
-        <option value="1">One</option>
-      </select>
-    </div>
-    <div class="col-1">
-      <button type="button" class="btn btn-primary">Filter</button>
-    </div>
-    <div class="col-1">
-      <button type="button" class="btn btn-primary">Clear</button>
+    <div class="col-9">
+      <app-car-filter-full></app-car-filter-full>
     </div>
   </div>
 </div>
@@ -105,4 +38,3 @@
     }
   </tbody>
 </table>
-}

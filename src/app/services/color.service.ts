@@ -11,7 +11,7 @@ export class ColorService {
   apiUrl = 'http://localhost:5270/api/Colors/getall';
   constructor(private http: HttpClient) {}
 
-  getColor(): Observable<ListResponseModel<Color>> {
+  getColors(): Observable<ListResponseModel<Color>> {
     return this.http.get<ListResponseModel<Color>>(this.apiUrl);
   }
 }
