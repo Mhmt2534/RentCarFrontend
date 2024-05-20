@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../../services/car.service';
 import { RentalService } from '../../services/rental.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Car } from '../../models/car';
 import { CarImageService } from '../../services/car-image.service';
 import { CarImageDetail } from '../../models/carImageDetail';
 import { CarDetailService } from '../../services/car-detail.service';
 import { CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-rental-car',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, FormsModule, RouterModule],
   templateUrl: './rental-car.component.html',
   styleUrl: './rental-car.component.css',
 })

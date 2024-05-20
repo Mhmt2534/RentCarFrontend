@@ -1,56 +1,76 @@
-<div class="container" style="position: relative; left: 270px">
-  <div class="card" style="width: 18rem">
-    <div id="carouselExample" class="carousel slide">
-      <div class="carousel-inner">
-        @for (item of carImages; track item;let i=$index) {
-        <div class="carousel-item active" [class.active]="i == 0">
-          <img
-            [src]="apiImage + item.imagePath"
-            class="d-block w-100"
-            alt="..."
-            style="height: 200px"
-          />
+<div class="container" style="position: relative">
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body" style="text-align: center">
+          <h2 class="card-title mb-2 mt-2">{{ selectedCar?.carName }}</h2>
+          <p class="card-text mb-1">Arabanın Özellikleri</p>
         </div>
-        }
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item mb-3">
+            <b>Marka</b> | {{ selectedCar?.brandName }}
+          </li>
+          <li class="list-group-item mb-2">
+            <b>Renk</b> | {{ selectedCar?.colorName }}
+          </li>
+          <li class="list-group-item mb-1">
+            <b>Günlük Fiyat</b> |
+            {{ selectedCar?.dailyPrice | currency : "₺" : "symbol" : "1.2-2" }}
+          </li>
+          <li class="list-group-item">
+            <div class="form-group">
+              <label for="rentDate">Kiralama Tarihi:</label>
+              <input type="date" class="form-control" name="rentDate" />
+            </div>
+            <div class="form-group">
+              <label for="returnDate">Dönüş Tarihi:</label>
+              <input type="date" class="form-control" name="returnDate" />
+            </div>
+          </li>
+          <li style="text-align: center" class="list-group-item">
+            <button
+              class="btn btn-success mt-1 mb-2"
+              routerLink="/cars/payment"
+            >
+              Kirala
+            </button>
+          </li>
+        </ul>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExample"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ selectedCar?.carName }}</h5>
-      <p class="card-text">Arabanın Özellikleri</p>
+    <div class="col">
+      <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          @for (item of carImages; track item;let i=$index) {
+          <div class="carousel-item active" [class.active]="i == 0">
+            <img
+              [src]="apiImage + item.imagePath"
+              class="d-block w-100"
+              alt="..."
+              style="height: 100%"
+            />
+          </div>
+          }
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <b>Marka</b> | {{ selectedCar?.brandName }}
-      </li>
-      <li class="list-group-item">
-        <b>Renk</b> | {{ selectedCar?.colorName }}
-      </li>
-      <li class="list-group-item">
-        <b>Günlük Fiyat</b> |
-        {{ selectedCar?.dailyPrice | currency : "₺" : "symbol" : "1.2-2" }}
-      </li>
-
-      <li style="text-align: center" class="list-group-item">
-        <button class="btn btn-success mt-1 mb-1">Kirala</button>
-      </li>
-    </ul>
   </div>
 </div>
