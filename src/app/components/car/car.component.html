@@ -24,6 +24,9 @@
       <th scope="col">Color</th>
       <th scope="col">Model Year</th>
       <th scope="col">Daily Price</th>
+      <th scope="col">
+        <button class="btn btn-success" routerLink="/cars/add">Add</button>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +37,7 @@
       <td>{{ item.colorName }}</td>
       <td>{{ item.modelYear }}</td>
       <td>{{ item.dailyPrice | currency : "TRY" : "symbol" : "1.2-2" }}</td>
+      <td><button class="btn btn-success">Update</button></td>
     </tr>
     }
   </tbody>
